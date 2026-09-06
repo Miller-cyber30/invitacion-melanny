@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Melanny cumple 11 ✨ | Invitación</title>
+<meta name="description" content="¡Estás invitad@ al cumpleaños de Melanny!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root{ --rosa:#ff5d9e; --mora:#a855f7; --texto:#fff; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;color:var(--texto);min-height:100vh;overflow-x:hidden;position:relative;
+  background:linear-gradient(-45deg,#ff5d9e,#c86bff,#ff8fc7,#7c5cff);background-size:400% 400%;animation:degradado 16s ease infinite}
+@keyframes degradado{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+.rain{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+canvas#part{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+#intro{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background:linear-gradient(160deg,#2b1055,#7c2f8f);transition:opacity .8s,visibility .8s;padding:20px}
+#intro.hide{opacity:0;visibility:hidden}
+#intro h2{font-family:'Fredoka';font-weight:700;font-size:clamp(1.7rem,6.5vw,2.9rem);
+  background:linear-gradient(90deg,#ffd1ec,#fff,#e0c3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+#intro p{opacity:.85;margin:.4rem 0 1.5rem;font-weight:600}
+.btn-abrir{background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border:2px solid rgba(255,255,255,.6);
+  padding:15px 36px;border-radius:40px;font-weight:700;font-size:1.1rem;cursor:pointer;font-family:'Fredoka'}
+.btn-abrir:hover{background:#fff;color:var(--rosa)}
+.kitty{width:150px;height:150px;filter:drop-shadow(0 10px 24px rgba(0,0,0,.3));animation:flota 3s ease-in-out infinite}
+@keyframes flota{50%{transform:translateY(-14px)}}
+
+.wrap{position:relative;z-index:2;display:flex;justify-content:center;padding:26px 14px 90px;min-height:100vh}
+.invitacion{max-width:460px;width:100%;background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,.10));
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1.5px solid rgba(255,255,255,.4);
+  border-radius:30px;padding:28px 24px 30px;box-shadow:0 24px 60px rgba(0,0,0,.28);position:relative;overflow:hidden}
+.kitty-sm{width:120px;height:120px;display:block;margin:0 auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));animation:flota 3.4s ease-in-out infinite}
+.pre{text-align:center;letter-spacing:4px;text-transform:uppercase;font-weight:700;font-size:.72rem;opacity:.9}
+.nombre{font-family:'Fredoka';font-weight:700;text-align:center;font-size:clamp(2.6rem,12vw,3.8rem);line-height:1;margin:.1rem 0;
+  background:linear-gradient(90deg,#fff,#ffd9ee,#fff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 2px 20px rgba(255,255,255,.3)}
+.sub{text-align:center;font-weight:700;font-size:1.15rem;opacity:.95;margin-bottom:4px}
+.hero-cd{margin:16px 0 6px}
+.hero-cd .cd-titulo{text-align:center;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.72rem;opacity:.85;margin-bottom:8px}
+.hero-cd .cd-box{background:rgba(255,255,255,.20);border:1px solid rgba(255,255,255,.35)}
+.hero-cd .cd-box b{color:#fff}.hero-cd .cd-box span{color:rgba(255,255,255,.85)}
+.linea{height:1px;background:rgba(255,255,255,.35);margin:16px 0}
+.frase{text-align:center;font-weight:500;opacity:.95;margin:4px 6px 14px}
+.datos{display:grid;gap:11px}
+.dato{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:12px 14px}
+.dato .ic{font-size:1.5rem}
+.dato b{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:1px;opacity:.85}
+.dato span{font-weight:600}
+.rsvp{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:18px 16px;margin-top:14px}
+.rsvp h3{text-align:center;font-family:'Fredoka';font-weight:700;margin-bottom:12px;font-size:1.3rem}
+.rsvp input,.rsvp textarea{width:100%;border:1px solid rgba(255,255,255,.45);border-radius:12px;padding:12px 14px;margin-bottom:10px;
+  font-family:'Quicksand';font-weight:600;color:#fff;background:rgba(255,255,255,.12);resize:vertical}
+.rsvp input::placeholder,.rsvp textarea::placeholder{color:rgba(255,255,255,.75)}
+.rsvp input:focus,.rsvp textarea:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.22)}
+.btn{width:100%;border:none;border-radius:40px;padding:14px;font-family:'Fredoka';font-weight:700;font-size:1.05rem;cursor:pointer;
+  color:#a1266b;background:linear-gradient(90deg,#fff,#ffe3f1);box-shadow:0 8px 22px rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}
+.acciones{display:flex;gap:10px;margin-top:14px}
+.acciones a,.acciones button{flex:1;text-decoration:none;text-align:center;border:1.5px solid rgba(255,255,255,.6);color:#fff;
+  background:rgba(255,255,255,.1);border-radius:40px;padding:12px;font-family:'Fredoka';font-weight:600;cursor:pointer;font-size:.9rem}
+.acciones a:hover,.acciones button:hover{background:#fff;color:var(--rosa)}
+
+#music{position:fixed;right:16px;bottom:16px;z-index:40;width:56px;height:56px;border-radius:50%;border:2px solid rgba(255,255,255,.7);
+  background:rgba(255,255,255,.18);backdrop-filter:blur(8px);color:#fff;font-size:1.5rem;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+#music.playing{animation:girar 4s linear infinite}
+@keyframes girar{to{transform:rotate(360deg)}}
+
+.anim{opacity:0;transform:translateY(26px);transition:.7s}
+body.go .anim{opacity:1;transform:none}
+body.go .anim:nth-child(2){transition-delay:.1s}
+body.go .anim:nth-child(3){transition-delay:.2s}
+@media print{ #intro,#music,.rain,#part,.acciones,.rsvp{display:none!important} body{animation:none;background:#a855f7} }
+</style>
+</head>
+<body>
+<canvas id="part"></canvas>
+<div class="rain" id="rain"></div>
+
+<div id="intro">
+  <svg class="kitty" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M44 78 L58 30 L92 64 Z" fill="#fff" stroke="#f0c9e6" stroke-width="4"/>
+    <path d="M156 78 L142 30 L108 64 Z" fill="#fff" stroke="#f0c9e6" stroke-width="4"/>
+    <path d="M54 68 L61 42 L80 62 Z" fill="#f3d1ff"/><path d="M146 68 L139 42 L120 62 Z" fill="#f3d1ff"/>
+    <ellipse cx="100" cy="112" rx="70" ry="60" fill="#fff" stroke="#f0c9e6" stroke-width="4"/>
+    <g stroke="#f0c9e6" stroke-width="3" stroke-linecap="round"><path d="M30 108h30"/><path d="M28 122h30"/><path d="M170 108h-30"/><path d="M172 122h-30"/></g>
+    <ellipse cx="76" cy="110" rx="8.5" ry="12" fill="#4a3540"/><ellipse cx="124" cy="110" rx="8.5" ry="12" fill="#4a3540"/>
+    <circle cx="79" cy="105" r="3" fill="#fff"/><circle cx="127" cy="105" r="3" fill="#fff"/>
+    <ellipse cx="60" cy="128" rx="11" ry="6.5" fill="#ffb0d8" opacity=".85"/><ellipse cx="140" cy="128" rx="11" ry="6.5" fill="#ffb0d8" opacity=".85"/>
+    <path d="M100 120 c-4-6-15-4-15 3.5 c0 6.5 11 11.5 15 15 c4-3.5 15-8.5 15-15 c0-7.5-11-9.5-15-3.5 Z" fill="#ff5d9e"/>
+    <path d="M86 138 q14 13 28 0" fill="none" stroke="#c576a8" stroke-width="3.5" stroke-linecap="round"/>
+    <g transform="translate(140,58)"><path d="M0 0 C-22-15 -22 15 0 0 Z" fill="#a855f7"/><path d="M0 0 C22-15 22 15 0 0 Z" fill="#a855f7"/><circle cx="0" cy="0" r="6.5" fill="#c58bff"/></g>
+  </svg>
+  <h2>Melanny cumple 11 ✨</h2>
+  <p>Una invitación hecha con cariño…</p>
+  <button class="btn-abrir" onclick="abrir()">Descubrir 💫</button>
+</div>
+
+<div class="wrap">
+  <div class="invitacion" id="tarjeta">
+    <svg class="kitty-sm" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M44 78 L58 30 L92 64 Z" fill="#fff" stroke="#f0c9e6" stroke-width="4"/>
+      <path d="M156 78 L142 30 L108 64 Z" fill="#fff" stroke="#f0c9e6" stroke-width="4"/>
+      <path d="M54 68 L61 42 L80 62 Z" fill="#f3d1ff"/><path d="M146 68 L139 42 L120 62 Z" fill="#f3d1ff"/>
+      <ellipse cx="100" cy="112" rx="70" ry="60" fill="#fff" stroke="#f0c9e6" stroke-width="4"/>
+      <g stroke="#f0c9e6" stroke-width="3" stroke-linecap="round"><path d="M30 108h30"/><path d="M28 122h30"/><path d="M170 108h-30"/><path d="M172 122h-30"/></g>
+      <ellipse cx="76" cy="110" rx="8.5" ry="12" fill="#4a3540"/><ellipse cx="124" cy="110" rx="8.5" ry="12" fill="#4a3540"/>
+      <circle cx="79" cy="105" r="3" fill="#fff"/><circle cx="127" cy="105" r="3" fill="#fff"/>
+      <ellipse cx="60" cy="128" rx="11" ry="6.5" fill="#ffb0d8" opacity=".85"/><ellipse cx="140" cy="128" rx="11" ry="6.5" fill="#ffb0d8" opacity=".85"/>
+      <path d="M100 120 c-4-6-15-4-15 3.5 c0 6.5 11 11.5 15 15 c4-3.5 15-8.5 15-15 c0-7.5-11-9.5-15-3.5 Z" fill="#ff5d9e"/>
+      <path d="M86 138 q14 13 28 0" fill="none" stroke="#c576a8" stroke-width="3.5" stroke-linecap="round"/>
+      <g transform="translate(140,58)"><path d="M0 0 C-22-15 -22 15 0 0 Z" fill="#a855f7"/><path d="M0 0 C22-15 22 15 0 0 Z" fill="#a855f7"/><circle cx="0" cy="0" r="6.5" fill="#c58bff"/></g>
+    </svg>
+    <div class="pre anim">Estás invitad@ al cumple de</div>
+    <h1 class="nombre anim" data-cfg="nombre">Melanny</h1>
+    <div class="sub anim">¡Cumple 11 añitos! 🎀</div>
+    <div class="hero-cd anim">
+      <div class="cd-titulo">La fiesta empieza en</div>
+      <div class="cd-wrap" id="cd"></div>
+    </div>
+    <div class="linea"></div>
+    <p class="frase anim">Será una tarde mágica llena de sorpresas. ¡No puedes faltar! 💖</p>
+    <div class="datos anim">
+      <div class="dato"><span class="ic">📅</span><div><b>Fecha</b><span data-cfg="fechaTexto">—</span></div></div>
+      <div class="dato"><span class="ic">🕒</span><div><b>Hora</b><span data-cfg="hora">—</span></div></div>
+      <div class="dato"><span class="ic">📍</span><div><b>Lugar</b><span data-cfg="lugar">—</span><br><span data-cfg="direccion" style="font-weight:500;font-size:.85rem;opacity:.9"></span></div></div>
+    </div>
+    <div class="rsvp anim">
+      <h3>Confirma tu asistencia ✨</h3>
+      <form id="form">
+        <input name="nombre" placeholder="Tu nombre y apellido" required>
+        <input name="personas" type="number" min="1" value="1" placeholder="¿Cuántas personas?" required>
+        <textarea name="mensaje" rows="2" placeholder="Mensaje para Melanny (opcional)"></textarea>
+        <button class="btn" type="submit">Confirmar asistencia 💫</button>
+      </form>
+    </div>
+    <div class="acciones">
+      <a data-cfg-href="mapsUrl" target="_blank" rel="noopener">📍 Cómo llegar</a>
+      <button onclick="descargarPDF('#tarjeta','invitacion-melanny.pdf','#a855f7')">⬇️ PDF</button>
+    </div>
+  </div>
+</div>
+
+<button id="music" title="Música" onclick="toggleMusic()">🎵</button>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="config.js"></script>
+<script src="shared.js"></script>
+<script>
+  lluvia('#rain', ['✨','💖','🌟','🎀','💫']);
+  countdown('cd');
+  // Partículas brillantes
+  (function(){ const c=document.getElementById('part'), x=c.getContext('2d'); let W,H,ps=[];
+    function rz(){ W=c.width=innerWidth; H=c.height=innerHeight; }
+    function mk(){ return {x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.2+.5,s:Math.random()*.5+.15,o:Math.random()*.6+.2}; }
+    function init(){ ps=Array.from({length:70},mk); }
+    function draw(){ x.clearRect(0,0,W,H); ps.forEach(p=>{ p.y-=p.s; if(p.y<-5){p.y=H+5;p.x=Math.random()*W;}
+      x.beginPath(); x.arc(p.x,p.y,p.r,0,7); x.fillStyle='rgba(255,255,255,'+p.o+')'; x.fill(); }); requestAnimationFrame(draw); }
+    addEventListener('resize',()=>{rz();init();}); rz(); init(); draw(); })();
+  function abrir(){ document.getElementById('intro').classList.add('hide'); document.body.classList.add('go'); MusicBox.start(); setMusicBtn(); fiesta(); }
+  function toggleMusic(){ MusicBox.toggle(); setMusicBtn(); }
+  function setMusicBtn(){ const b=document.getElementById('music'); b.classList.toggle('playing',MusicBox.playing); b.textContent=MusicBox.playing?'🔊':'🎵'; }
+  document.getElementById('form').addEventListener('submit', async e=>{
+    e.preventDefault();
+    const f=e.target, data={nombre:f.nombre.value.trim(),personas:+f.personas.value||1,mensaje:f.mensaje.value.trim()};
+    const btn=f.querySelector('button'); btn.textContent='Enviando…'; btn.disabled=true;
+    try{ const r=await enviarRSVP(data,'invitacion-3'); toast(r==='ok'?'¡Confirmado! Gracias 💖':'Te llevamos a WhatsApp 💬'); fiesta(); f.reset(); }
+    catch(err){ toast('Ups, intenta de nuevo 🙏'); }
+    btn.textContent='Confirmar asistencia 💫'; btn.disabled=false;
+  });
+  function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3200); }
+</script>
+</body>
+</html>

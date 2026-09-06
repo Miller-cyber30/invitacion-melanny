@@ -1,0 +1,19 @@
+/* shared.css — animaciones y utilidades comunes a las 3 invitaciones */
+
+/* Lluvia de elementos (corazones, moños, estrellas) */
+.cae{ position:absolute; top:-44px; animation:caer linear forwards; pointer-events:none; z-index:1; will-change:transform; }
+@keyframes caer{ to{ transform:translateY(112vh) rotate(360deg); } }
+
+/* Conteo regresivo */
+.cd-wrap{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+.cd-box{ background:rgba(255,255,255,.82); border-radius:16px; padding:10px 14px; min-width:66px; text-align:center;
+  box-shadow:0 6px 18px rgba(255,93,143,.22); }
+.cd-box b{ display:block; font-size:1.9rem; color:#ff3d7f; line-height:1; font-weight:800; }
+.cd-box span{ font-size:.66rem; text-transform:uppercase; letter-spacing:1px; color:#b07f92; }
+.cd-hoy{ font-weight:800; color:#ff3d7f; font-size:1.15rem; }
+
+/* Toast (mensaje flotante) */
+.toast{ position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(140px);
+  background:#fff; color:#c1367a; padding:14px 22px; border-radius:40px;
+  box-shadow:0 14px 34px rgba(0,0,0,.22); font-weight:700; z-index:9999; transition:.45s; max-width:90%; text-align:center; }
+.toast.show{ transform:translateX(-50%) translateY(0); }

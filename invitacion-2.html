@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Melanny cumple 11 🎉 | Invitación</title>
+<meta name="description" content="¡Estás invitad@ al cumpleaños de Melanny!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root{ --rosa:#ff2e7e; --amar:#ffd23f; --cel:#4fc3f7; --mora:#b06bff; --texto:#5a2a45; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Fredoka',sans-serif;color:var(--texto);min-height:100vh;overflow-x:hidden;position:relative;
+  background:#ffe1ef radial-gradient(circle,#ffb3d1 8%,transparent 9%) 0 0/26px 26px;}
+.rain{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+
+/* Globos flotando de fondo */
+.globos{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.globo{position:absolute;bottom:-120px;width:44px;height:56px;border-radius:50%;opacity:.55;animation:subir linear infinite}
+.globo::after{content:"";position:absolute;bottom:-8px;left:50%;width:2px;height:16px;background:rgba(0,0,0,.15)}
+@keyframes subir{to{transform:translateY(-118vh) translateX(30px)}}
+
+#intro{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(160deg,#ff5fa2,#ffd23f);text-align:center;transition:opacity .7s,visibility .7s;padding:20px}
+#intro.hide{opacity:0;visibility:hidden}
+#intro h2{font-family:'Baloo 2';font-weight:800;color:#fff;font-size:clamp(1.7rem,6.5vw,2.8rem);text-shadow:0 4px 0 #d81f68}
+#intro p{color:#fff;margin:.3rem 0 1.4rem;font-weight:600}
+.btn-abrir{background:#fff;color:var(--rosa);border:none;padding:15px 34px;border-radius:40px;font-weight:700;font-size:1.15rem;cursor:pointer;box-shadow:0 12px 26px rgba(0,0,0,.22);font-family:'Baloo 2'}
+.btn-abrir:hover{transform:scale(1.06)}
+.kitty{width:150px;height:150px;animation:brinca 1.4s ease-in-out infinite}
+@keyframes brinca{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-16px) rotate(3deg)}}
+
+.wrap{position:relative;z-index:2;display:flex;justify-content:center;padding:24px 14px 90px}
+.invitacion{max-width:450px;width:100%;background:#fff;border-radius:30px;padding:0 0 30px;
+  box-shadow:0 20px 50px rgba(255,46,126,.32);border:5px solid #ffd23f;position:relative;overflow:hidden}
+.cinta{background:repeating-linear-gradient(45deg,#ff2e7e 0 22px,#ff5fa2 22px 44px);color:#fff;text-align:center;
+  padding:14px;font-family:'Baloo 2';font-weight:800;letter-spacing:1px;font-size:1rem;text-shadow:0 2px 0 rgba(0,0,0,.15)}
+.cabeza{text-align:center;padding:14px 22px 0}
+.kitty-sm{width:130px;height:130px;animation:brinca 1.8s ease-in-out infinite}
+.nombre{font-family:'Baloo 2';font-weight:800;color:var(--rosa);font-size:clamp(2.6rem,12vw,3.6rem);line-height:1;margin:.1rem 0;text-shadow:0 4px 0 #ffd0e2}
+.badge{display:inline-block;background:var(--mora);color:#fff;font-family:'Baloo 2';font-weight:800;font-size:1.5rem;padding:6px 22px;border-radius:40px;box-shadow:0 6px 0 #8f49e0;margin:6px 0}
+.cuerpo{padding:6px 22px 0}
+.frase{text-align:center;font-weight:500;color:#8a5a72;margin:12px 6px}
+.datos{display:grid;gap:12px;margin:12px 0}
+.dato{display:flex;gap:12px;align-items:center;border-radius:18px;padding:13px 15px;color:#fff}
+.dato:nth-child(1){background:var(--cel)}.dato:nth-child(2){background:var(--rosa)}.dato:nth-child(3){background:var(--mora)}
+.dato .ic{font-size:1.7rem}
+.dato b{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:1px;opacity:.9}
+.dato span{font-weight:600}
+.cd-titulo{text-align:center;font-family:'Baloo 2';font-weight:700;color:var(--rosa);margin:8px 0;text-transform:uppercase;letter-spacing:1px;font-size:.85rem}
+.rsvp{background:#fff4f9;border:3px dashed #ffb3d1;border-radius:22px;padding:18px 16px;margin-top:12px}
+.rsvp h3{text-align:center;font-family:'Baloo 2';font-weight:800;color:var(--rosa);margin-bottom:10px;font-size:1.4rem}
+.rsvp input,.rsvp textarea{width:100%;border:2px solid #ffc2dc;border-radius:14px;padding:12px 14px;margin-bottom:10px;font-family:'Fredoka';font-weight:500;color:var(--texto);background:#fff;resize:vertical}
+.rsvp input:focus,.rsvp textarea:focus{outline:none;border-color:var(--rosa)}
+.btn{width:100%;border:none;border-radius:40px;padding:15px;font-family:'Baloo 2';font-weight:800;font-size:1.05rem;cursor:pointer;color:#fff;background:var(--rosa);box-shadow:0 7px 0 #c11e63}
+.btn:active{transform:translateY(4px);box-shadow:0 3px 0 #c11e63}
+.acciones{display:flex;gap:10px;margin-top:14px;padding:0 22px}
+.acciones a,.acciones button{flex:1;text-decoration:none;text-align:center;border:none;color:#fff;border-radius:40px;padding:13px;font-family:'Baloo 2';font-weight:700;cursor:pointer;font-size:.92rem}
+.acciones a{background:var(--cel);box-shadow:0 5px 0 #2ba7dd}
+.acciones button{background:var(--amar);color:#8a5a00;box-shadow:0 5px 0 #e0b400}
+.acciones a:active,.acciones button:active{transform:translateY(3px)}
+
+#music{position:fixed;right:16px;bottom:16px;z-index:40;width:58px;height:58px;border-radius:50%;border:4px solid #fff;background:var(--rosa);color:#fff;font-size:1.5rem;cursor:pointer;box-shadow:0 8px 20px rgba(255,46,126,.5)}
+#music.playing{animation:girar 3s linear infinite}
+@keyframes girar{to{transform:rotate(360deg)}}
+
+.anim{opacity:0;transform:scale(.85);transition:.5s cubic-bezier(.34,1.56,.64,1)}
+body.go .anim{opacity:1;transform:none}
+@media print{ #intro,#music,.rain,.globos,.acciones,.rsvp{display:none!important} }
+</style>
+</head>
+<body>
+<div class="rain" id="rain"></div>
+<div class="globos" id="globos"></div>
+
+<div id="intro">
+  <svg class="kitty" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M44 78 L58 30 L92 64 Z" fill="#fff" stroke="#ffb3d1" stroke-width="4"/>
+    <path d="M156 78 L142 30 L108 64 Z" fill="#fff" stroke="#ffb3d1" stroke-width="4"/>
+    <path d="M54 68 L61 42 L80 62 Z" fill="#ffd23f"/><path d="M146 68 L139 42 L120 62 Z" fill="#ffd23f"/>
+    <ellipse cx="100" cy="112" rx="70" ry="60" fill="#fff" stroke="#ffb3d1" stroke-width="4"/>
+    <g stroke="#ffb3d1" stroke-width="3" stroke-linecap="round"><path d="M30 108h30"/><path d="M28 122h30"/><path d="M170 108h-30"/><path d="M172 122h-30"/></g>
+    <ellipse cx="76" cy="110" rx="8.5" ry="12" fill="#4a3540"/><ellipse cx="124" cy="110" rx="8.5" ry="12" fill="#4a3540"/>
+    <circle cx="79" cy="105" r="3" fill="#fff"/><circle cx="127" cy="105" r="3" fill="#fff"/>
+    <ellipse cx="60" cy="128" rx="11" ry="6.5" fill="#ff9ec2" opacity=".9"/><ellipse cx="140" cy="128" rx="11" ry="6.5" fill="#ff9ec2" opacity=".9"/>
+    <path d="M100 120 c-4-6-15-4-15 3.5 c0 6.5 11 11.5 15 15 c4-3.5 15-8.5 15-15 c0-7.5-11-9.5-15-3.5 Z" fill="#ff2e7e"/>
+    <path d="M86 138 q14 13 28 0" fill="none" stroke="#d16aa0" stroke-width="3.5" stroke-linecap="round"/>
+    <g transform="translate(140,58)"><path d="M0 0 C-22-15 -22 15 0 0 Z" fill="#b06bff"/><path d="M0 0 C22-15 22 15 0 0 Z" fill="#b06bff"/><circle cx="0" cy="0" r="6.5" fill="#c58bff"/></g>
+  </svg>
+  <h2>¡Melanny cumple 11! 🎉</h2>
+  <p>Toca para abrir tu invitación…</p>
+  <button class="btn-abrir" onclick="abrir()">¡Vamos a la fiesta! 🎈</button>
+</div>
+
+<div class="wrap">
+  <div class="invitacion" id="tarjeta">
+    <div class="cinta">🎂 ¡ESTÁS INVITAD@ A MI CUMPLE! 🎂</div>
+    <div class="cabeza">
+      <svg class="kitty-sm anim" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="M44 78 L58 30 L92 64 Z" fill="#fff" stroke="#ffb3d1" stroke-width="4"/>
+        <path d="M156 78 L142 30 L108 64 Z" fill="#fff" stroke="#ffb3d1" stroke-width="4"/>
+        <path d="M54 68 L61 42 L80 62 Z" fill="#ffd23f"/><path d="M146 68 L139 42 L120 62 Z" fill="#ffd23f"/>
+        <ellipse cx="100" cy="112" rx="70" ry="60" fill="#fff" stroke="#ffb3d1" stroke-width="4"/>
+        <g stroke="#ffb3d1" stroke-width="3" stroke-linecap="round"><path d="M30 108h30"/><path d="M28 122h30"/><path d="M170 108h-30"/><path d="M172 122h-30"/></g>
+        <ellipse cx="76" cy="110" rx="8.5" ry="12" fill="#4a3540"/><ellipse cx="124" cy="110" rx="8.5" ry="12" fill="#4a3540"/>
+        <circle cx="79" cy="105" r="3" fill="#fff"/><circle cx="127" cy="105" r="3" fill="#fff"/>
+        <ellipse cx="60" cy="128" rx="11" ry="6.5" fill="#ff9ec2" opacity=".9"/><ellipse cx="140" cy="128" rx="11" ry="6.5" fill="#ff9ec2" opacity=".9"/>
+        <path d="M100 120 c-4-6-15-4-15 3.5 c0 6.5 11 11.5 15 15 c4-3.5 15-8.5 15-15 c0-7.5-11-9.5-15-3.5 Z" fill="#ff2e7e"/>
+        <path d="M86 138 q14 13 28 0" fill="none" stroke="#d16aa0" stroke-width="3.5" stroke-linecap="round"/>
+        <g transform="translate(140,58)"><path d="M0 0 C-22-15 -22 15 0 0 Z" fill="#b06bff"/><path d="M0 0 C22-15 22 15 0 0 Z" fill="#b06bff"/><circle cx="0" cy="0" r="6.5" fill="#c58bff"/></g>
+      </svg>
+      <h1 class="nombre anim" data-cfg="nombre">Melanny</h1>
+      <div class="badge anim">¡11 años! 🎀</div>
+    </div>
+    <div class="cuerpo">
+      <p class="frase anim">🎊 Te espero para reír, bailar y comer mucha torta 🎊</p>
+      <div class="datos">
+        <div class="dato anim"><span class="ic">📅</span><div><b>Fecha</b><span data-cfg="fechaTexto">—</span></div></div>
+        <div class="dato anim"><span class="ic">🕒</span><div><b>Hora</b><span data-cfg="hora">—</span></div></div>
+        <div class="dato anim"><span class="ic">📍</span><div><b>Lugar</b><span data-cfg="lugar">—</span> · <span data-cfg="direccion"></span></div></div>
+      </div>
+      <div class="cd-titulo anim">⏳ Cuenta regresiva</div>
+      <div class="cd-wrap anim" id="cd"></div>
+      <div class="rsvp anim">
+        <h3>¡Confírmame! 💌</h3>
+        <form id="form">
+          <input name="nombre" placeholder="Tu nombre y apellido" required>
+          <input name="personas" type="number" min="1" value="1" placeholder="¿Cuántas personas vienen?" required>
+          <textarea name="mensaje" rows="2" placeholder="Déjale un saludo a Melanny (opcional)"></textarea>
+          <button class="btn" type="submit">¡Ahí estaré! 🎉</button>
+        </form>
+      </div>
+    </div>
+    <div class="acciones">
+      <a data-cfg-href="mapsUrl" target="_blank" rel="noopener">📍 Cómo llegar</a>
+      <button onclick="descargarPDF('#tarjeta','invitacion-melanny.pdf')">⬇️ Guardar PDF</button>
+    </div>
+  </div>
+</div>
+
+<button id="music" title="Música" onclick="toggleMusic()">🎵</button>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="config.js"></script>
+<script src="shared.js"></script>
+<script>
+  lluvia('#rain', ['🎈','🎉','⭐','💜','🎀','🍭']);
+  // globos de fondo
+  (function(){ const cols=['#ff2e7e','#ffd23f','#4fc3f7','#b06bff','#7ed957']; const g=document.getElementById('globos');
+    for(let i=0;i<8;i++){ const b=document.createElement('div'); b.className='globo'; b.style.left=(Math.random()*100)+'%';
+      b.style.background=cols[i%cols.length]; b.style.animationDuration=(9+Math.random()*8)+'s'; b.style.animationDelay=(Math.random()*8)+'s'; g.appendChild(b);} })();
+  countdown('cd');
+  function abrir(){ document.getElementById('intro').classList.add('hide'); document.body.classList.add('go'); MusicBox.start(); setMusicBtn(); fiesta(); }
+  function toggleMusic(){ MusicBox.toggle(); setMusicBtn(); }
+  function setMusicBtn(){ const b=document.getElementById('music'); b.classList.toggle('playing',MusicBox.playing); b.textContent=MusicBox.playing?'🔊':'🎵'; }
+  document.getElementById('form').addEventListener('submit', async e=>{
+    e.preventDefault();
+    const f=e.target, data={nombre:f.nombre.value.trim(),personas:+f.personas.value||1,mensaje:f.mensaje.value.trim()};
+    const btn=f.querySelector('button'); btn.textContent='Enviando…'; btn.disabled=true;
+    try{ const r=await enviarRSVP(data,'invitacion-2'); toast(r==='ok'?'¡Confirmado! Nos vemos 🎉':'Te llevamos a WhatsApp 💬'); fiesta(); f.reset(); }
+    catch(err){ toast('Ups, intenta de nuevo 🙏'); }
+    btn.textContent='¡Ahí estaré! 🎉'; btn.disabled=false;
+  });
+  function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3200); }
+</script>
+</body>
+</html>

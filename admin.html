@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirmaciones · Melanny 🎀</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:#fff0f5;color:#5a3a48;padding:26px 14px}
+h1{text-align:center;color:#ff5d8f;font-size:1.7rem}
+.resumen{max-width:760px;margin:14px auto;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.chip{background:#fff;border-radius:16px;padding:12px 20px;box-shadow:0 8px 20px rgba(255,93,143,.18);text-align:center}
+.chip b{display:block;font-size:1.8rem;color:#ff3d7f}
+.chip span{font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:#a86b7d}
+table{max-width:760px;margin:16px auto;width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 10px 26px rgba(255,93,143,.16)}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid #ffe1ea;font-size:.92rem}
+th{background:#ff5d8f;color:#fff;font-size:.8rem;text-transform:uppercase;letter-spacing:1px}
+tr:hover td{background:#fff6fa}
+.msg{text-align:center;color:#a86b7d;margin:20px;font-weight:600}
+.btn{display:block;max-width:760px;margin:0 auto 20px;background:#ff5d8f;color:#fff;border:none;border-radius:40px;padding:12px;font-family:'Quicksand';font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<h1>🎀 Confirmaciones de asistencia</h1>
+<div class="resumen" id="resumen"></div>
+<button class="btn" onclick="cargar()">🔄 Actualizar</button>
+<div id="cont"><p class="msg">Cargando…</p></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+  async function cargar(){
+    const cont=document.getElementById('cont'), res=document.getElementById('resumen');
+    if(!CONFIG.supabaseUrl || !CONFIG.supabaseAnonKey){
+      cont.innerHTML='<p class="msg">⚠️ Aún no configuraste Supabase en config.js.</p>'; return; }
+    const sb=supabase.createClient(CONFIG.supabaseUrl,CONFIG.supabaseAnonKey);
+    cont.innerHTML='<p class="msg">Cargando…</p>';
+    const {data,error}=await sb.from('confirmaciones').select('*').order('created_at',{ascending:false});
+    if(error){ cont.innerHTML='<p class="msg">Error: '+error.message+'</p>'; return; }
+    if(!data.length){ cont.innerHTML='<p class="msg">Todavía no hay confirmaciones 💌</p>'; res.innerHTML=''; return; }
+    const totalP=data.reduce((a,b)=>a+(b.personas||0),0);
+    res.innerHTML='<div class="chip"><b>'+data.length+'</b><span>confirmaciones</span></div>'+
+                  '<div class="chip"><b>'+totalP+'</b><span>personas</span></div>';
+    let html='<table><tr><th>Nombre</th><th>Personas</th><th>Mensaje</th><th>Invitación</th><th>Fecha</th></tr>';
+    data.forEach(r=>{ const f=new Date(r.created_at).toLocaleString('es-PE');
+      html+='<tr><td>'+esc(r.nombre)+'</td><td>'+(r.personas||1)+'</td><td>'+esc(r.mensaje||'—')+'</td><td>'+esc(r.invitacion||'—')+'</td><td>'+f+'</td></tr>'; });
+    html+='</table>'; cont.innerHTML=html;
+  }
+  function esc(s){ return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+  cargar();
+</script>
+</body>
+</html>
