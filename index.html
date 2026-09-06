@@ -157,4 +157,143 @@ footer .k{font-size:1.4rem}
     </div>
   </section>
   <section class="invita rev">
-    <div class="orn"><i></i><span
+    <div class="orn"><i></i><span style="color:var(--rose)">🎀</span><i></i></div>
+    <p class="body">Acompáñame a festejar este día tan <em>especial</em> junto a mi familia y a todos mis seres queridos. ¡Será una tarde llena de dulzura y alegría!</p>
+  </section>
+  <section class="fecha rev">
+    <div class="eyebrow">Te espero el</div>
+    <div class="datebox"><span class="dow" id="dow">Lunes</span><span class="num" id="dnum">07</span><span class="my" id="my">Septiembre<br>2026</span></div>
+    <div class="hora" id="hora">6:00 p. m.</div>
+    <div class="cd-label">Faltan para el gran día</div>
+    <div class="cd" id="cd"></div>
+  </section>
+  <section class="ubica rev">
+    <div class="orn"><i></i><svg class="bow" viewBox="0 0 60 40"><g fill="#c7a355"><path d="M30 20C16 6 6 10 8 20C6 30 16 34 30 20Z"/><path d="M30 20C44 6 54 10 52 20C54 30 44 34 30 20Z"/><circle cx="30" cy="20" r="5"/></g></svg><i></i></div>
+    <div class="eyebrow">Ubicación</div>
+    <div class="script">¿Dónde será?</div>
+    <div class="dir" id="dir">Asociación Bello Horizonte<span>Mz. C — Lt. 2B, Puente Piedra, Lima</span></div>
+    <a class="btn" id="mapsBtn" target="_blank" rel="noopener">Ver ubicación 📍</a>
+  </section>
+  <section class="conf rev">
+    <div class="eyebrow">Confírmame</div>
+    <div class="script">¿Nos acompañas?</div>
+    <p class="body" style="max-width:320px">Toca el botón y avísame por WhatsApp 💌</p>
+    <a class="btn wa" id="waBtn" target="_blank" rel="noopener">¡Ahí estaré! 💗</a>
+  </section>
+  <section class="galeria rev">
+    <div class="orn"><i></i><span style="color:var(--rose)">🎀</span><i></i></div>
+    <div class="eyebrow">Recuerdos</div>
+    <div class="script">Nuestra cumpleañera</div>
+    <div class="fotos">
+      <figure class="foto"><img src="assets/g1.jpg" alt="Melanny" loading="lazy"><figcaption>Campeona ✦</figcaption></figure>
+      <figure class="foto"><img src="assets/g2.jpg" alt="Melanny bailando" loading="lazy"><figcaption>Con arte ✦</figcaption></figure>
+      <figure class="foto"><img src="assets/g3.jpg" alt="Melanny" loading="lazy"><figcaption>Siempre feliz ✦</figcaption></figure>
+    </div>
+  </section>
+  <section class="cierre rev">
+    <div class="bg" id="cierreBg"></div>
+    <div class="in"><div class="te">¡Te espero!</div><div class="fn" id="nomFin">Melanny · 11 años</div></div>
+  </section>
+  <footer>Hecho con cariño 🎀 · <span class="k">🐱</span><br>Melanny · Mis 11 años · 2026</footer>
+</div>
+<button id="music-fab" title="Música" onclick="toggleMain()">🎵</button>
+<script>
+const CONFIG = {
+  nombre:"Melanny", edad:11,
+  fechaISO:"2026-09-07T18:00:00",
+  diaSemana:"Lunes", diaNum:"07", mesAnio:"Septiembre<br>2026",
+  hora:"6:00 p. m.",
+  lugar:"Asociación Bello Horizonte",
+  direccion:"Mz. C — Lt. 2B, Puente Piedra, Lima",
+  mapsUrl:"https://maps.app.goo.gl/jrmjnVaec4koTjNV9",
+  whatsapp:"51968332181",
+  cancionPrincipal:"musica/principal.mp3",
+  carpetaCanciones:"musica/",
+  maxCanciones:20,
+};
+nomHero.textContent = CONFIG.nombre;
+dow.textContent = CONFIG.diaSemana; dnum.textContent = CONFIG.diaNum; my.innerHTML = CONFIG.mesAnio;
+hora.textContent = CONFIG.hora;
+dir.innerHTML = CONFIG.lugar + '<span>' + CONFIG.direccion + '</span>';
+mapsBtn.href = CONFIG.mapsUrl;
+nomFin.textContent = CONFIG.nombre + ' · ' + CONFIG.edad + ' años';
+heroBg.style.backgroundImage = "url('assets/hero.jpg')";
+cierreBg.style.backgroundImage = "url('assets/g1.jpg')";
+waBtn.href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' +
+  encodeURIComponent('¡Hola! 🎀 Confirmo mi asistencia al cumple de ' + CONFIG.nombre + '. ¡Ahí estaré! 💗');
+(function(){ const ch=['🌸','🎀','💗','✦'];
+  setInterval(()=>{ const s=document.createElement('span'); s.className='petalo'; s.textContent=ch[Math.random()*ch.length|0];
+    s.style.left=Math.random()*100+'%'; s.style.fontSize=(11+Math.random()*16)+'px';
+    s.style.animationDuration=(7+Math.random()*7)+'s'; s.style.opacity=.4+Math.random()*.5;
+    petalos.appendChild(s); setTimeout(()=>s.remove(),14000); }, 650); })();
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);} }),{threshold:.15});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+(function(){ const t=new Date(CONFIG.fechaISO).getTime();
+  const box=(v,l)=>`<div class="c"><b>${String(v).padStart(2,'0')}</b><span>${l}</span></div>`;
+  function tick(){ if(isNaN(t)){cd.innerHTML=box('♥','pronto');return;}
+    const d=t-Date.now(); if(d<=0){cd.innerHTML='<div style="font-family:\'Pinyon Script\',cursive;font-size:2rem;color:var(--rose-d)">¡Hoy es el gran día! 🎉</div>';return;}
+    cd.innerHTML=box(Math.floor(d/864e5),'Días')+box(Math.floor(d%864e5/36e5),'Horas')+box(Math.floor(d%36e5/6e4),'Min')+box(Math.floor(d%6e4/1e3),'Seg'); }
+  tick(); setInterval(tick,1000); })();
+let mainReady=null;
+const audioMain=new Audio(CONFIG.cancionPrincipal); audioMain.loop=true; audioMain.preload='auto';
+audioMain.addEventListener('canplay',()=>{ mainReady=true; });
+audioMain.addEventListener('error',()=>{ mainReady=false; });
+const Box=(function(){ let ctx,mst,on=false,i=0,nt=0,tm=null;
+  const N={C5:523.25,D5:587.33,E5:659.25,G5:783.99,A5:880,B5:987.77,C6:1046.5,D6:1174.66,E6:1318.51,R:0};
+  const mel=[['E5',.34],['G5',.34],['C6',.42],['B5',.30],['A5',.42],['G5',.30],['E5',.46],['R',.14],['D5',.34],['E5',.34],['G5',.42],['E5',.30],['D5',.30],['C5',.56],['R',.2],['E5',.3],['G5',.3],['C6',.4],['E6',.34],['D6',.34],['C6',.44],['A5',.3],['G5',.5],['R',.2]];
+  function tone(f,t,d){ if(!f)return; const o=ctx.createOscillator(),o2=ctx.createOscillator(),g=ctx.createGain(); o.type='triangle';o2.type='sine';o.frequency.value=f;o2.frequency.value=f*2;o2.detune.value=5; g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+d*.96); o.connect(g);o2.connect(g);g.connect(mst);o.start(t);o2.start(t);o.stop(t+d);o2.stop(t+d); }
+  function loop(){ const now=ctx.currentTime; while(nt<now+.5){const[n,d]=mel[i];tone(N[n],nt,d);nt+=d;i=(i+1)%mel.length;} tm=setTimeout(loop,130); }
+  return{start(){ if(on)return; ctx=ctx||new(window.AudioContext||window.webkitAudioContext)(); if(ctx.state==='suspended')ctx.resume(); if(!mst){mst=ctx.createGain();mst.gain.value=.5;mst.connect(ctx.destination);} on=true;nt=ctx.currentTime+.1;loop(); },
+        stop(){on=false;clearTimeout(tm);}, get on(){return on;}}; })();
+function mainPlaying(){ return mainReady===false ? Box.on : !audioMain.paused; }
+function listPlaying(){ return !audioList.paused && !!audioList.src; }
+function toggleMain(){
+  if(listPlaying()) audioList.pause();
+  if(mainReady===false){ Box.on?Box.stop():Box.start(); }
+  else { if(audioMain.paused){ audioMain.play().catch(()=>{ mainReady=false; Box.start(); }); } else audioMain.pause(); }
+  sync();
+}
+const audioList=new Audio(); let tracks=[], curIdx=-1;
+audioList.addEventListener('ended',()=>{ if(curIdx<tracks.length-1) playTrack(curIdx+1); else {curIdx=-1;sync();} });
+async function detectar(){
+  const found=[];
+  await Promise.all(Array.from({length:CONFIG.maxCanciones},(_,k)=>k+1).map(async n=>{
+    const src=CONFIG.carpetaCanciones+'cancion'+n+'.mp3';
+    try{ const r=await fetch(src,{method:'HEAD'}); if(r.ok) found.push({n,src,title:'Canción '+n}); }catch(e){}
+  }));
+  tracks=found.sort((a,b)=>a.n-b.n);
+  render();
+}
+function render(){
+  if(!tracks.length){ plList.innerHTML='<div class="pl-empty">Aún no hay canciones. Sube <b>cancion1.mp3</b>, <b>cancion2.mp3</b>… a la carpeta <b>musica/</b> y aparecerán aquí.</div>'; return; }
+  plList.innerHTML=tracks.map((t,i)=>`<div class="pl-item" data-i="${i}"><span class="n">${t.n}</span><span>${t.title}</span></div>`).join('');
+  plList.querySelectorAll('.pl-item').forEach(el=>el.onclick=()=>playTrack(+el.dataset.i));
+}
+function playTrack(i){ if(i<0||i>=tracks.length)return; if(mainPlaying()){ audioMain.pause(); Box.stop(); } curIdx=i; audioList.src=tracks[i].src; audioList.play().catch(()=>{}); sync(); }
+function togglePlaylist(){ if(!tracks.length)return; if(curIdx<0){playTrack(0);} else if(audioList.paused){ if(mainPlaying()){audioMain.pause();Box.stop();} audioList.play().catch(()=>{});} else audioList.pause(); sync(); }
+function nextTrack(){ if(tracks.length) playTrack(curIdx<0?0:(curIdx+1)%tracks.length); }
+function prevTrack(){ if(tracks.length) playTrack(curIdx<=0?tracks.length-1:curIdx-1); }
+function sync(){
+  const m=mainPlaying(), l=listPlaying();
+  playMain.textContent=m?'❚❚':'▶'; playMain.classList.toggle('on',m);
+  mainState.textContent=m?'Sonando… ♫':'Toca para escuchar';
+  const fab=document.getElementById('music-fab'); fab.textContent=(m||l)?'🔊':'🎵'; fab.classList.toggle('on',m||l);
+  plPlay.textContent=l?'❚❚':'▶';
+  document.querySelectorAll('.pl-item').forEach((el,i)=>el.classList.toggle('act',i===curIdx&&l));
+  plNow.textContent=(curIdx>=0)?tracks[curIdx].title:'—';
+}
+function fiesta(){ if(typeof confetti!=='function')return; const c=['#b85a76','#f3c7d5','#c7a355','#fff','#e9aec1'];
+  confetti({particleCount:130,spread:90,origin:{y:.55},colors:c,scalar:.9});
+  setTimeout(()=>confetti({particleCount:70,angle:60,spread:70,origin:{x:0},colors:c}),160);
+  setTimeout(()=>confetti({particleCount:70,angle:120,spread:70,origin:{x:1},colors:c}),320); }
+let abierto=false;
+function abrir(){ if(abierto)return; abierto=true; env.classList.add('open');
+  if(mainReady===false){ Box.start(); } else { audioMain.play().catch(()=>{ mainReady=false; Box.start(); }); }
+  sync();
+  setTimeout(()=>{ intro.classList.add('hide'); fiesta();
+    document.querySelectorAll('.rev').forEach(el=>{ if(el.getBoundingClientRect().top<innerHeight)el.classList.add('in'); }); }, 850); }
+detectar();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</body>
+</html>
