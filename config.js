@@ -21,12 +21,12 @@ window.CONFIG = {
   lugar:     "Asociación Bello Horizonte",
   direccion: "Mz. C — Lt. 2B, Puente Piedra, Lima",
   // Link del mapa (puedes reemplazarlo con tu ubicación exacta de Google Maps)
-  mapsUrl:   "https://www.google.com/maps/search/?api=1&query=Asociaci%C3%B3n+Bello+Horizonte+Puente+Piedra+Lima+Per%C3%BA", // 👈 EDITA
+  mapsUrl:   "https://maps.app.goo.gl/jrmjnVaec4koTjNV9", // 👈 EDITA
 
   /* --- WhatsApp (por si Supabase no está configurado, la confirmación llega por aquí) --- */
-  whatsapp:  "51999999999",             // 👈 EDITA  (código país + número, sin el +)
+  whatsapp:  "51968332181",             // 👈 EDITA  (código país + número, sin el +)
 
   /* --- Supabase (para guardar las confirmaciones) --- */
-  supabaseUrl:     "",                  // 👈 EDITA  (ej: https://abcd1234.supabase.co)
-  supabaseAnonKey: "",                  // 👈 EDITA  (la clave "anon public")
+  supabaseUrl:     "https://qhvcvjxdjcxodhasbigg.supabase.co/rest/v1/",                  // 👈 EDITA  (ej: https://abcd1234.supabase.co)
+  supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFodmN2anhkamN4b2RoYXNiaWdnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2NjcxNzksImV4cCI6MjEwNDI0MzE3OX0.bIiboF7IjTGjhCrqYsue71pJ1r_KuIrWvIxs8OuSx6o",                  // 👈 EDITA  (la clave "anon public")
 };
